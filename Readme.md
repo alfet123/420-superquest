@@ -1,11 +1,11 @@
 # Личный проект «{{projectTitle}}» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
-* Студент: [{{userName}}](https://up.htmlacademy.ru/javascript/7/user/{{userId}}).
-* Наставник: `Неизвестно`.
+* Студенты: [Щепотьев Евгений](https://up.htmlacademy.ru/ecmascript/1/user/125753)
+* Наставник: [Игорь Алексеенко](https://up.htmlacademy.ru/ecmascript/1/user/100868)
 
 ---
 
-_Не удаляйте и не обращайте внимание на папки и файлы:_  
+_Не удаляйте и не обращайте внимание на папки и файлы:_
 _`bin`, `tests`, `.editorconfig`, `.eslintignore`, `.eslintrc`, `.gitignore`, `.travis.yml`, `package.json`._
 
 ---
