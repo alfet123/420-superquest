@@ -1,4 +1,4 @@
-# Учебный проект «Супер Квест» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
+# Учебный проект «Супер Квест» [![Build status][travis-image]][travis-url]
 
 * Студенты: [Щепотьев Евгений](https://up.htmlacademy.ru/ecmascript/1/user/125753)
 * Наставник: [Игорь Алексеенко](https://up.htmlacademy.ru/ecmascript/1/user/100868)
@@ -16,5 +16,3 @@ _`bin`, `tests`, `.editorconfig`, `.eslintignore`, `.eslintrc`, `.gitignore`, `.
 
 [travis-image]: https://travis-ci.org/htmlacademy-javascript/420-superquest.svg?branch=master
 [travis-url]: https://travis-ci.org/htmlacademy-javascript/420-superquest
-[dependency-image]: https://david-dm.org/htmlacademy-javascript/420-superquest.svg?style=flat-square
-[dependency-url]: https://david-dm.org/htmlacademy-javascript/420-superquest
