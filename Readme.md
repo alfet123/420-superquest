@@ -1,4 +1,4 @@
-# Личный проект «{{projectTitle}}» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
+# Учебный проект «Супер Квест» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студенты: [Щепотьев Евгений](https://up.htmlacademy.ru/ecmascript/1/user/125753)
 * Наставник: [Игорь Алексеенко](https://up.htmlacademy.ru/ecmascript/1/user/100868)
