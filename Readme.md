@@ -14,5 +14,5 @@ _`bin`, `tests`, `.editorconfig`, `.eslintignore`, `.eslintrc`, `.gitignore`, `.
 
 Репозиторий создан для обучения на интенсивном онлайн‑курсе «[Продвинутый JavaScript](https://htmlacademy.ru/intensive/ecmascript)» от [HTML Academy](https://htmlacademy.ru).
 
-[travis-image]: https://travis-ci.org/htmlacademy-javascript/420-superquest.svg?branch=master
-[travis-url]: https://travis-ci.org/htmlacademy-javascript/420-superquest
+[travis-image]: https://travis-ci.org/htmlacademy-ecmascript/420-superquest.svg?branch=master
+[travis-url]: https://travis-ci.org/htmlacademy-ecmascript/420-superquest
