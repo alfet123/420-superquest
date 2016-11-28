@@ -1,4 +1,4 @@
 import game from './game';
-import {changeView} from "./util";
+import {changeView} from './util';
 
 changeView(game);

@@ -1,5 +1,5 @@
 import {createElement, changeView} from './util';
-import game from "./game";
+import game from './game';
 
 const html = `
 <div class="end">
@@ -10,8 +10,8 @@ const html = `
 
 const element = createElement(html);
 
-element.querySelector(`span.repeat-action`).onclick = (e) => {
-  e.preventDefault();
+element.querySelector(`span.repeat-action`).onclick = (evt) => {
+  evt.preventDefault();
 
   changeView(game);
 };

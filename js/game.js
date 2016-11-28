@@ -2,7 +2,7 @@ import {createElement, changeView} from './util';
 import renderHeader from './game/header';
 import renderLevel from './game/game-level';
 import {quest, game} from './data/quest';
-import end from "./end";
+import end from './end';
 
 const footer = `<div class="result"></div>
 <small>Для справки введите <i>help</i></small></ul>`;
