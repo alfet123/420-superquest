@@ -1,27 +1,24 @@
-import {Verdict} from "./game-const";
-export class ActionResult {
-  /**
-   * @param {Verdict} verdict
-   * @param {string} message
-   * @param {number} time
-   * @param {GameScreen} destination
-   */
-  constructor({verdict = Verdict.NOOP, message = '', time = 0, destination = null}) {
-    this.verdict = verdict;
-    this.message = message;
-    this.time = 0;
-    this.destination = destination;
-  }
-}
+import {createElement} from './util';
+import header from './game/header';
 
+const answer = `
+<ul class="answers">
+  <li class="answer">LEFT. Вы побежите влево, от гриба</li>
+  <li class="answer">RIGHT. Вы побежите вправо, прямо на гриб</li>
+  <li class="answer">JUMP. Вы прыгнете вверх</li>
+</ul>`;
 
-export class GameScreen {
-  /**
-   * @param {string} disposition
-   * @param {Map.<Command, ActionResult>} commands
-   */
-  constructor(disposition = ``, commands = new Map()) {
-    this.disposition = disposition;
-    this.commands = commands;
-  }
-}
+export default createElement(`
+${header}
+<div class="quest">
+  <p class="text">Вас зовут Луиджи Марио, вы водопроводчик, но сейчас перед вами стоит очень важная миссия —&nbsp;спасти
+    принцессу Грибного Королевства Тоадстул Пич. Её похитил злой повелитель черепах Боузер и вы отправились в Грибное
+    Королевство, чтобы победить Боузера и освободить принцессу. Вы отправляетесь в первый замок, но, чтобы в него
+    попасть нужно преодолеть несколько препятствий. Вы стоите посреди на одной из равнин Грибного Королевства и видите
+    как на вас стремительно несется хмурый гриб вашего роста. Нужно срочно что-то предпринять
+  </p>
+  <input type="text">
+  ${answer}  
+</div>
+<div class="result"></div>
+<small>Для справки введите <i>help</i></small></ul>`);

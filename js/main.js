@@ -1,8 +1,4 @@
-import GameEngine from './engine';
-import welcome from './level-0/welcome';
-import view from './game-view';
+import game from './game';
 
 const main = document.getElementById('main');
-main.appendChild(view);
-
-new GameEngine(welcome).start();
+main.appendChild(game);

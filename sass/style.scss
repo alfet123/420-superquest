@@ -25,12 +25,12 @@ input[type=text]:focus {
   outline: none;
 }
 
-.container {
+.text {
   min-height: 4em;
   max-width: 40em;
-  padding-bottom: 4em;
+  padding-bottom: 2em;
 
-  text-align: justify;
+  //text-align: justify;
 }
 
 .result {
@@ -38,10 +38,21 @@ input[type=text]:focus {
   padding-top: 1em;
 }
 
-.app__header{
+.header{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 
   padding: 20px 40px;
+}
+
+.answers {
+  list-style: none;
+
+  padding: 0;
+}
+
+.heart__full {
+  margin-top: -0.5em;
+  font-size: 1.5em;
 }
