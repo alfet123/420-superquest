@@ -102,7 +102,7 @@ gulp.task('serve', ['assemble'], function () {
       gulp.start('copy-html');
     }
   });
-  gulp.watch('js/**/*.js', ['scripts']).on('change', server.reload);
+  gulp.watch('js/**/*.js', ['scripts', server.reload]);
 });
 
 gulp.task('assemble', ['clean'], function () {
