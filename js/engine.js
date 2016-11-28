@@ -1,6 +1,5 @@
-import {Command} from "./game-const";
-import {Verdict} from "./game-const";
-import {GameScreen, ActionResult} from "./game";
+import {Command, Verdict} from './game-const';
+import {GameScreen, ActionResult} from './game';
 
 // TODO: Экран со статистикой
 // TODO: Сущность пользователя
@@ -31,9 +30,9 @@ export default class GameEngine {
     return new Map([
       [Command.HELP, new ActionResult({
         message: `Доступные команды:
-          ${Array.from(this.currentView.commands.keys())
-          .concat(Array.from(GameEngine.commonCommands.values()))
-          .join('\n')}`
+        ${Array.from(this.currentView.commands.keys()).
+            concat(Array.from(GameEngine.commonCommands.values())).
+            join('\n')}`
       })],
 
       [Command.STAT, new ActionResult({

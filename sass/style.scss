@@ -29,9 +29,19 @@ input[type=text]:focus {
   min-height: 4em;
   max-width: 40em;
   padding-bottom: 4em;
+
+  text-align: justify;
 }
 
 .result {
   font-size: 1em;
   padding-top: 1em;
+}
+
+.app__header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  padding: 20px 40px;
 }
