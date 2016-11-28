@@ -118,7 +118,6 @@ gulp.task('test', function () {
       compilers: {
         js: 'babel-register'
       },
-      reporter: 'nyan',
-      ui: 'bdd'
+      reporter: 'nyan'
     }));
 });
