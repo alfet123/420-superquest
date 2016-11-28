@@ -1,7 +1,7 @@
 import {createElement} from './util';
 import renderHeader from './game/header';
 import renderLevel from './game/game-level';
-import {quest} from "./data/quest";
+import {quest, game} from './data/quest';
 
 const footer = `<div class="result"></div>
 <small>Для справки введите <i>help</i></small></ul>`;
@@ -13,7 +13,7 @@ const changeLevel = (num) => {
   current = num;
   const level = quest[`level-${num}`];
 
-  element.innerHTML = `${renderHeader()}
+  element.innerHTML = `${renderHeader(game)}
           ${renderLevel(level)}
           ${footer}`;
 };
