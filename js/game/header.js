@@ -1,4 +1,5 @@
-const markup = `
+export default (data) => {
+  return `
 <header class="header">
   <div>Мир: 1</div>
   <div>Жизни: <span class="heart__empty">&#9825;</span>
@@ -7,4 +8,4 @@ const markup = `
   </div>
   <div>Время: 420</div>
 </header>`;
-export default markup;
+};
