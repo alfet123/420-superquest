@@ -1,5 +1,5 @@
 const drawHeart = (full) => {
-  return `<span class="heart__${full ? `full` : `empty`}">${full ? `&#9829;` : `&#9825;`}</span>`
+  return `<span class="heart__${full ? `full` : `empty`}">${full ? `&#9829;` : `&#9825;`}</span>`;
 };
 
 export default (data) => {

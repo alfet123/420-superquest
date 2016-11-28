@@ -18,7 +18,7 @@ const changeLevel = (num) => {
           ${footer}`;
 };
 
-//Load first level on start!
+// Load first level on start!
 changeLevel(0);
 
 document.onkeydown = (evt) => {
