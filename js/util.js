@@ -3,3 +3,10 @@ export const createElement = (template) => {
   outer.innerHTML = template;
   return outer;
 };
+
+const main = document.getElementById('main');
+
+export const changeView = (element) => {
+  main.innerHTML = ``;
+  main.appendChild(element)
+};

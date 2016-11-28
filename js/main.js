@@ -1,4 +1,4 @@
 import game from './game';
+import {changeView} from "./util";
 
-const main = document.getElementById('main');
-main.appendChild(game);
+changeView(game);

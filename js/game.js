@@ -1,7 +1,8 @@
-import {createElement} from './util';
+import {createElement, changeView} from './util';
 import renderHeader from './game/header';
 import renderLevel from './game/game-level';
 import {quest, game} from './data/quest';
+import end from "./end";
 
 const footer = `<div class="result"></div>
 <small>Для справки введите <i>help</i></small></ul>`;
@@ -9,9 +10,10 @@ const footer = `<div class="result"></div>
 let current = -1;
 const element = createElement('');
 
+const getLevel = (num) => quest[`level-${num}`];
 const changeLevel = (num) => {
   current = num;
-  const level = quest[`level-${num}`];
+  const level = getLevel(num);
 
   element.innerHTML = `${renderHeader(game)}
           ${renderLevel(level)}
@@ -23,7 +25,13 @@ changeLevel(0);
 
 document.onkeydown = (evt) => {
   if (evt.keyCode === 13) {
-    changeLevel(current + 1);
+    const next = current + 1;
+    if (getLevel(next)) {
+      changeLevel(next);
+    } else {
+      changeLevel(0);
+      changeView(end);
+    }
   }
 };
 
