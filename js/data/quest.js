@@ -5,7 +5,7 @@ export const initialGame = {
 };
 
 
-export const setLevel = (game, level) => {
+export const setCurrentLevel = (game, level) => {
   return Object.assign({}, game, {
     level: level
   });

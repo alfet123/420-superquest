@@ -2,7 +2,7 @@ import {createElement, changeView} from './util';
 import renderFooter from './game/footer';
 import renderHeader from './game/header';
 import renderLevel from './game/game-level';
-import {initialGame, setLevel, setTime, questInfo, hasLevel, getLevel} from './data/quest';
+import {initialGame, setCurrentLevel, setTime, questInfo, hasLevel, getLevel} from './data/quest';
 import end from './end';
 
 
@@ -21,7 +21,7 @@ const update = () => {
 document.onkeydown = (evt) => {
   if (evt.keyCode === 13) {
     if (hasLevel(questInfo, game.level + 1)) {
-      game = setLevel(game, game.level + 1);
+      game = setCurrentLevel(game, game.level + 1);
       update();
     } else {
       game = initialGame;
@@ -38,5 +38,5 @@ export default () => {
   interval = setInterval(() => {
     game = setTime(game, game.time + 1);
     update();
-  }, 1000)
-}
+  }, 1000);
+};
