@@ -3,7 +3,7 @@ export default (level) => {
   <p class="text">${level.text}</p>
   <input type="text">
   <ul class="answers">
-    ${level.answers.map((it) => `<li class="answer">${it}</li>`).join('')}
+    ${level.answers.map((it) => `<li class="answer">${it.action}</li>`).join('')}
   </ul>  
 </div>`;
 };

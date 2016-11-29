@@ -1,19 +1,19 @@
-import {createElement, changeView} from './util';
-import game from './game';
+import {createElement} from './util';
+import init from './game';
 
-const html = `
+
+const element = createElement(`
 <div class="end">
   <p>КОНЕЦ!</p>
   <p>Повторим?!</p>
   <div class="repeat"><span class="repeat-action">Да</span>|<span class="repeat-action">Не</a></div>
-</div>`;
+</div>`);
 
-const element = createElement(html);
 
 element.querySelector(`span.repeat-action`).onclick = (evt) => {
   evt.preventDefault();
-
-  changeView(game);
+  init();
 };
+
 
 export default element;

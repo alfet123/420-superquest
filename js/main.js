@@ -1,4 +1,3 @@
-import game from './game';
-import {changeView} from './util';
+import init from './game';
 
-changeView(game);
+init();

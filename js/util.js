@@ -4,7 +4,9 @@ export const createElement = (template) => {
   return outer;
 };
 
+
 const main = document.getElementById('main');
+
 
 export const changeView = (element) => {
   main.innerHTML = ``;

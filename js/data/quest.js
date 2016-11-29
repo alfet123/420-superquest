@@ -1,10 +1,44 @@
-export const game = {
+export const initialGame = {
   level: 0,
   lives: 2,
   time: 0
 };
 
-export const quest = {
+
+export const setLevel = (game, level) => {
+  return Object.assign({}, game, {
+    level: level
+  });
+};
+
+
+export const setTime = (game, time) => {
+  return Object.assign({}, game, {
+    time: time
+  });
+};
+
+
+export const setLives = (game, lives) => {
+  if (lives < 0) {
+    throw new RangeError(`Number of lives can't be negative`);
+  }
+
+  return Object.assign({}, game, {
+    lives: lives
+  });
+};
+
+
+export const Result = {
+  DIE: 0,
+  NOOP: 1,
+  NEXT: 2,
+  WIN: 3
+};
+
+
+export const questInfo = {
   'level-0': {
     text: `Вас зовут Луиджи Марио, вы водопроводчик, но сейчас перед вами стоит очень важная миссия — спасти принцессу 
     Грибного Королевства Тоадстул Пич. Её похитил злой повелитель черепах Боузер и вы отправились в Грибное Королевство, 
@@ -12,17 +46,30 @@ export const quest = {
     преодолеть несколько препятствий. Вы стоите посреди на одной из равнин Грибного Королевства и видите как на вас 
     стремительно несется хмурый гриб вашего роста. Нужно срочно что-то предпринять`,
     answers: [
-      `LEFT. Вы побежите влево, от гриба`,
-      `RIGHT. Вы побежите вправо, прямо на гриб`,
-      `JUMP. Вы прыгнете вверх`
+      {
+        action: `LEFT. Вы побежите влево, от гриба`,
+        result: Result.DIE
+      },
+      {
+        action: `RIGHT. Вы побежите вправо, прямо на гриб`,
+        result: Result.DIE
+      },
+      {
+        action: `JUMP. Вы прыгнете вверх`,
+        result: Result.NEXT
+      }
     ]
   },
+
   'level-1': {
     text: `Теперь, когда угроза быть убитым грибом миновала, вы можете спокойно оглядеться по сторонам. Вы видите что 
     над вами прямо в двумерном небе висят кирпичные блоки, которые перемежаются с непонятными металлическими 
     конструкциями. Что вы предпримете?`,
     answers: [
-      `JUMP. Как что, конечно же подпрыгну и со всей силы ударюсь головой о железяку!`
+      {
+        action: `JUMP. Как что, конечно же подпрыгну и со всей силы ударюсь головой о железяку!`,
+        result: Result.NEXT
+      }
     ]
   },
   'level-2': {
@@ -31,7 +78,23 @@ export const quest = {
     радостно прыгать и разносить головой все кирпичи, но случайно ударяетесь о еще одну металлическую штуку и видите 
     как из нее вырастает цветок. Ваши действия?`,
     answers: [
-      `1. Конечно же съесть его!`
+      {
+        action: `1. Конечно же съесть его!`,
+        result: Result.WIN
+      }
     ]
   }
 };
+
+
+export const hasLevel = (quest, num) => typeof quest[`level-${num}`] !== 'undefined';
+
+
+export const getLevel = (quest, num) => {
+  if (!hasLevel(quest, num)) {
+    throw new RangeError(`This game has no level ${num}`);
+  }
+
+  return quest[`level-${num}`];
+};
+
