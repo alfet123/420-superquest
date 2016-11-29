@@ -8,26 +8,29 @@ const footer = `<div class="result"></div>
 <small>Для справки введите <i>help</i></small></ul>`;
 
 let current = -1;
-const element = createElement('');
+let element;
 
 const getLevel = (num) => quest[`level-${num}`];
+
 const changeLevel = (num) => {
   current = num;
   const level = getLevel(num);
 
-  element.innerHTML = `${renderHeader(game)}
+  element = createElement(`
+          ${renderHeader(game)}
           ${renderLevel(level)}
-          ${footer}`;
+          ${footer}`);
+  return element;
 };
 
 // Load first level on start!
-changeLevel(0);
+element = changeLevel(0);
 
 document.onkeydown = (evt) => {
   if (evt.keyCode === 13) {
     const next = current + 1;
     if (getLevel(next)) {
-      changeLevel(next);
+      changeView(changeLevel(next));
     } else {
       changeLevel(0);
       changeView(end);
