@@ -1,9 +1,11 @@
 import AbstractView from './view';
+import FooterView from './footer-view';
 
 export default class LevelView extends AbstractView {
   constructor(levelData) {
     super();
     this.level = levelData;
+    this.footer = new FooterView();
   }
 
   set onAnswer(handler) {
@@ -22,7 +24,8 @@ export default class LevelView extends AbstractView {
       <ul class="answers">
         ${this.level.answers.map((it, i) => `<li class="answer">${it.action}</li>`).join('')}
       </ul>  
-    </div>`;
+    </div>
+    ${this.footer.getMarkup()}`;
   }
 
   bindHandlers() {

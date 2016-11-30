@@ -1,5 +1,4 @@
 import {createElement} from '../util';
-import FooterView from './footer-view';
 import HeaderView from './header-view';
 import LevelView from './level-view';
 import GameOverView from './gameover-view';
@@ -10,7 +9,6 @@ export default class GameView {
 
     this._header = null;
     this._level = null;
-    this._footer = new FooterView();
   }
 
   set onAnswer(handler) {
@@ -37,6 +35,7 @@ export default class GameView {
     const level = new LevelView(data);
     level.onAnswer = this._onAnswer;
     this._changeLevel(level);
+    level.focus();
   }
 
 
@@ -60,7 +59,6 @@ export default class GameView {
       this._root = createElement(``);
       this._root.appendChild(this._header.element);
       this._root.appendChild(this._level.element);
-      this._root.appendChild(this._footer.element);
     }
     return this._root;
   }
