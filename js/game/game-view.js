@@ -1,32 +1,67 @@
 import {createElement} from '../util';
 import FooterView from './footer-view';
+import HeaderView from './header-view';
+import LevelView from './level-view';
+import GameOverView from './gameover-view';
 
 export default class GameView {
   constructor() {
-    this._root = createElement(``);
+    this._root = null;
 
-    this._header = createElement(``);
-    this._level = createElement(``);
-    this._footer = (new FooterView()).element;
-
-    this._root.appendChild(this._header);
-    this._root.appendChild(this._level);
-    this._root.appendChild(this._footer);
+    this._header = null;
+    this._level = null;
+    this._footer = new FooterView();
   }
 
-  set header(view) {
-    const element = view.element;
-    this._root.replaceChild(element, this._header);
-    this._header = element;
+  set onAnswer(handler) {
+    this._onAnswer = handler;
   }
 
-  set level(view) {
-    const element = view.element;
-    this._root.replaceChild(element, this._level);
-    this._level = element;
+  set onRestart(handler) {
+    this._onRestart = handler;
+  }
+
+  set onExit(handler) {
+    this._onExit = handler;
+  }
+
+  set header(data) {
+    const header = new HeaderView(data);
+    if (this._header) {
+      this._root.replaceChild(header.element, this._header.element);
+    }
+    this._header = header;
+  }
+
+  set level(data) {
+    const level = new LevelView(data);
+    level.onAnswer = this._onAnswer;
+    this._changeLevel(level);
+  }
+
+
+  gameOver(win, canContinue) {
+    const gameOver = new GameOverView(win, canContinue);
+    gameOver.onRestart = this._onRestart;
+    gameOver.onExit = this._onExit;
+
+    this._changeLevel(gameOver);
+  }
+
+  _changeLevel(level) {
+    if (this._level) {
+      this._root.replaceChild(level.element, this._level.element);
+    }
+    this._level = level;
   }
 
   get element() {
+    if (!this._root) {
+      this._root = createElement(``);
+      this._root.appendChild(this._header.element);
+      this._root.appendChild(this._level.element);
+      this._root.appendChild(this._footer.element);
+    }
     return this._root;
   }
 
