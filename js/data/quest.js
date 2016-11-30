@@ -29,18 +29,10 @@ export const setLives = (game, lives) => {
   });
 };
 
-
-export const Result = {
-  DIE: 0,
-  NOOP: 1,
-  NEXT: 2,
-  WIN: 3
-};
-
 export const hasLevel = (num) => typeof questInfo[`level-${num}`] !== 'undefined';
 
 export const getLevel = (num) => {
-  if (!hasLevel(questInfo, num)) {
+  if (!hasLevel(num)) {
     throw new RangeError(`This game has no level ${num}`);
   }
 

@@ -1,3 +1,10 @@
+export const Result = {
+  DIE: 0,
+  NOOP: 1,
+  NEXT: 2,
+  WIN: 3
+};
+
 export const questInfo = {
   'level-0': {
     text: `Вас зовут Луиджи Марио, вы водопроводчик, но сейчас перед вами стоит очень важная миссия — спасти принцессу 
