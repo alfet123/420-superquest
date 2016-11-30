@@ -1,22 +1,24 @@
 import {changeView} from './util';
-import {initialGame, setCurrentLevel, setTime, getLevel, setLives} from './data/quest';
 import {Result} from './data/quest-data';
 
 import GameView from './game/game-view';
 
 import showStats from './stats-screen';
+import QuestModel from './data/quest-model';
 
-let gameState = initialGame;
+const questModel = new QuestModel();
 
 const gameView = new GameView();
 gameView.onAnswer = (answer) => {
   endGame();
   switch (answer.result) {
     case Result.NEXT:
-      beginGame(setCurrentLevel(gameState, gameState.level + 1));
+      questModel.nextLevel();
+      beginGame();
       break;
     case Result.DIE:
-      gameView.gameOver(false, (gameState.lives - 1) > 0);
+      questModel.die();
+      gameView.gameOver(false, !(questModel.isDead()));
       break;
     case Result.WIN:
       gameView.gameOver(true, false);
@@ -26,11 +28,14 @@ gameView.onAnswer = (answer) => {
   }
 };
 gameView.onRestart = (continueGame) => {
-  gameState = continueGame ? setLives(gameState, gameState.lives - 1) : initialGame;
-  beginGame(gameState);
+  if (!continueGame) {
+    questModel.restart();
+  }
+  beginGame();
 };
+
 gameView.onExit = () => {
-  showStats(gameState);
+  showStats(questModel.state);
 };
 
 let interval = null;
@@ -39,19 +44,18 @@ const endGame = () => {
   clearInterval(interval);
 };
 
-const beginGame = (state = initialGame) => {
-  gameState = state;
-
-  gameView.header = gameState;
-  gameView.level = getLevel(gameState.level);
+const beginGame = () => {
+  gameView.header = questModel.state;
+  gameView.level = questModel.getCurrentLevel();
 
   interval = setInterval(() => {
-    gameState = setTime(gameState, gameState.time + 1);
-    gameView.header = gameState;
+    questModel.tick();
+    gameView.header = questModel.state;
   }, 1000);
 };
 
 export default () => {
+  questModel.restart();
   beginGame();
   changeView(gameView.element);
 };
