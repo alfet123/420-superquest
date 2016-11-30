@@ -6,9 +6,9 @@ export default (stats) => {
                 <div class="end">
                   <p>Ну что ж?! Вот и закончились твои приключения =(<br>
                   А вот немного статистики о тебе: <br>
-                  Прошел за: ${stats.time}
-                  Осталось жизней: ${stats.lives}
-                  Дошел до уровня: ${stats.level}
+                  Прошел за: ${stats.time}<br>
+                  Осталось жизней: ${stats.lives}<br>
+                  Дошел до уровня: ${stats.level}<br>
                   <p>Начнем по новой?</p>
                   <div class="repeat"><span class="repeat-action">Да</span></div>
                 </div>`);
@@ -20,4 +20,4 @@ export default (stats) => {
   };
 
   changeView(root);
-}
+};
