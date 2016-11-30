@@ -1,7 +1,7 @@
 import {questInfo} from './quest-data';
 export const initialGame = {
   level: 0,
-  lives: 2,
+  lives: 3,
   time: 0
 };
 
@@ -17,7 +17,6 @@ export const setTime = (game, time) => {
     time: time
   });
 };
-
 
 export const setLives = (game, lives) => {
   if (lives < 0) {

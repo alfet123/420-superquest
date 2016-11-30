@@ -1,8 +1,8 @@
-import {createElement} from './util';
+import {createElement, changeView} from './util';
 import init from './game';
 
 
-const element = createElement(`
+const root = createElement(`
 <div class="end">
   <p>КОНЕЦ!</p>
   <p>Повторим?!</p>
@@ -10,10 +10,10 @@ const element = createElement(`
 </div>`);
 
 
-element.querySelector(`span.repeat-action`).onclick = (evt) => {
+root.querySelector(`span.repeat-action`).onclick = (evt) => {
   evt.preventDefault();
   init();
 };
 
 
-export default element;
+export default () => changeView(root);
