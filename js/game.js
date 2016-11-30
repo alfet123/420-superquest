@@ -2,7 +2,7 @@ import {createElement, changeView} from './util';
 import renderFooter from './game/footer';
 import renderHeader from './game/header';
 import renderLevel from './game/game-level';
-import {initialGame, setCurrentLevel, setTime, hasLevel, getLevel} from './data/quest';
+import {initialGame, setCurrentLevel, setTime, getLevel} from './data/quest';
 import {Result} from './data/quest-data';
 
 import end from './end';
@@ -13,13 +13,13 @@ let gameState = initialGame;
 let interval = null;
 
 const root = createElement(``);
-const header = renderHeader(gameState);
-const level = renderLevel(getLevel(gameState.level));
-const footer = renderFooter();
+const headerElement = renderHeader(gameState);
+const levelElement = renderLevel(getLevel(gameState.level));
+const footerElement = renderFooter();
 
-root.appendChild(header);
-root.appendChild(level);
-root.appendChild(footer);
+root.appendChild(headerElement);
+root.appendChild(levelElement);
+root.appendChild(footerElement);
 
 const updateHeader = (game) => {
   renderHeader(game);

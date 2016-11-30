@@ -20,7 +20,7 @@ export default (level, onAnswer) => {
       evt.preventDefault();
 
       onAnswer(level.answers[i]);
-    }
+    };
   }
 
   const answerInput = gameElement.querySelector(`input`);

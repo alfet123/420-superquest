@@ -9,7 +9,7 @@ const range = (from = 0, to) => {
       array.push(callback(i));
     }
     return array;
-  }
+  };
 };
 
 const drawHearts = (lives) => {
