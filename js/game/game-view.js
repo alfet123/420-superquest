@@ -4,7 +4,8 @@ import LevelView from './level-view';
 import GameOverView from './gameover-view';
 
 export default class GameView {
-  constructor() {
+  constructor(model) {
+    this._model = model;
     this._root = null;
 
     this._header = null;
@@ -38,13 +39,30 @@ export default class GameView {
     level.focus();
   }
 
+  update() {
+    this.updateHeader();
 
-  gameOver(win, canContinue) {
+    const level = new LevelView(this._model.getCurrentLevel());
+    level.onAnswer = this._onAnswer;
+    this._changeLevel(level);
+    level.focus();
+  }
+
+  updateHeader() {
+    const header = new HeaderView(this._model.state);
+    if (this._header) {
+      this._root.replaceChild(header.element, this._header.element);
+    }
+    this._header = header;
+  }
+
+  endGame(win, canContinue) {
     const gameOver = new GameOverView(win, canContinue);
     gameOver.onRestart = this._onRestart;
     gameOver.onExit = this._onExit;
 
     this._changeLevel(gameOver);
+    this.updateHeader();
   }
 
   _changeLevel(level) {

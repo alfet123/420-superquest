@@ -8,7 +8,7 @@ import QuestModel from './data/quest-model';
 
 const questModel = new QuestModel();
 
-const gameView = new GameView();
+const gameView = new GameView(questModel);
 gameView.onAnswer = (answer) => {
   endGame();
   switch (answer.result) {
@@ -18,10 +18,10 @@ gameView.onAnswer = (answer) => {
       break;
     case Result.DIE:
       questModel.die();
-      gameView.gameOver(false, !(questModel.isDead()));
+      gameView.endGame(false, !(questModel.isDead()));
       break;
     case Result.WIN:
-      gameView.gameOver(true, false);
+      gameView.endGame(true, false);
       break;
     default:
       throw new Error(`Unknown result: ${answer.result}`);
@@ -45,12 +45,11 @@ const endGame = () => {
 };
 
 const beginGame = () => {
-  gameView.header = questModel.state;
-  gameView.level = questModel.getCurrentLevel();
+  gameView.update();
 
   interval = setInterval(() => {
     questModel.tick();
-    gameView.header = questModel.state;
+    gameView.updateHeader();
   }, 1000);
 };
 
