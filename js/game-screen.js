@@ -20,7 +20,7 @@ const game = {
   },
 
   startGame() {
-    game.update();
+    game.changeLevel();
 
     game.interval = setInterval(() => {
       questModel.tick();
@@ -64,7 +64,7 @@ const game = {
     game.header = header;
   },
 
-  update() {
+  changeLevel() {
     game.updateHeader();
 
     const level = new LevelView(questModel.getCurrentLevel());
