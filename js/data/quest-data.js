@@ -48,6 +48,14 @@ export const questInfo = {
       {
         action: `1. Конечно же съесть его!`,
         result: Result.WIN
+      },
+      {
+        action: `2. Растоптать цветок!`,
+        result: Result.DIE
+      },
+      {
+        action: `3. В панике убежать...`,
+        result: Result.DIE
       }
     ]
   }

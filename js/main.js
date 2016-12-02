@@ -1,3 +1,3 @@
-import init from './game';
+import showWelcome from './welcome-screen';
 
-init();
+showWelcome();
