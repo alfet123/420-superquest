@@ -17,4 +17,8 @@ export default class AbstractView {
   bindHandlers() {
     // By default there is nothing to bind
   }
+
+  clearHandlers() {
+    // By default nothing to clear
+  }
 }
