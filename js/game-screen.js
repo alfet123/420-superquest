@@ -2,99 +2,101 @@ import {changeView, createElement} from './util';
 import {Result} from './data/quest-data';
 
 import showStats from './stats-screen';
-import QuestModel from './data/quest-model';
+import questModel from './data/quest-model';
 import HeaderView from './game/header-view';
 import LevelView from './game/level-view';
 import GameOverView from './game/gameover-view';
 
-const questModel = new QuestModel();
-const root = createElement(``);
+class GamePresenter {
+  constructor() {
+    this.header = new HeaderView(questModel.state);
+    this.content = new LevelView(questModel.getCurrentLevel());
 
-const game = {
-  header: new HeaderView(questModel.state),
-  content: new LevelView(questModel.getCurrentLevel()),
-  interval: null,
+    this.root = createElement(``);
+    this.root.appendChild(this.header.element);
+    this.root.appendChild(this.content.element);
+
+    this._interval = null;
+  }
 
   stopGame()  {
-    clearInterval(game.interval);
-  },
+    clearInterval(this._interval);
+  }
 
   startGame() {
-    game.changeLevel();
+    this.changeLevel();
 
-    game.interval = setInterval(() => {
+    this._interval = setInterval(() => {
       questModel.tick();
-      game.updateHeader();
+      this.updateHeader();
     }, 1000);
-  },
+  }
 
-  onAnswer(answer) {
-    game.stopGame();
+  answer(answer) {
+    this.stopGame();
     switch (answer.result) {
       case Result.NEXT:
         questModel.nextLevel();
-        game.startGame();
+        this.startGame();
         break;
       case Result.DIE:
         questModel.die();
-        game.endGame(false, !(questModel.isDead()));
+        this.endGame(false, !(questModel.isDead()));
         break;
       case Result.WIN:
-        game.endGame(true, false);
+        this.endGame(true, false);
         break;
       default:
         throw new Error(`Unknown result: ${answer.result}`);
     }
-  },
+  }
 
-  onRestart(continueGame) {
+  restart(continueGame) {
     if (!continueGame) {
       questModel.restart();
     }
-    game.startGame();
-  },
+    this.startGame();
+  }
 
-  onExit() {
+  exit() {
     showStats(questModel.state);
-  },
+  }
 
   updateHeader() {
     const header = new HeaderView(questModel.state);
-    root.replaceChild(header.element, game.header.element);
-    game.header = header;
-  },
+    this.root.replaceChild(header.element, this.header.element);
+    this.header = header;
+  }
 
   changeLevel() {
-    game.updateHeader();
+    this.updateHeader();
 
     const level = new LevelView(questModel.getCurrentLevel());
-    level.onAnswer = game.onAnswer;
-    game.changeContentView(level);
+    level.onAnswer = this.answer.bind(this);
+    this.changeContentView(level);
     level.focus();
-  },
+  }
 
 
   endGame(win, canContinue) {
     const gameOver = new GameOverView(win, canContinue);
-    gameOver.onRestart = game.onRestart;
-    gameOver.onExit = game.onExit;
+    gameOver.onRestart = this.restart.bind(this);
+    gameOver.onExit = this.exit.bind(this);
 
     game.changeContentView(gameOver);
     game.updateHeader();
-  },
-
-  changeContentView(view) {
-    root.replaceChild(view.element, game.content.element);
-    game.content = view;
   }
 
-};
+  changeContentView(view) {
+    this.root.replaceChild(view.element, this.content.element);
+    this.content = view;
+  }
 
-root.appendChild(game.header.element);
-root.appendChild(game.content.element);
+}
+
+const game = new GamePresenter();
 
 export default () => {
-  questModel.restart();
-  game.startGame();
-  changeView(root);
+  game.restart(false);
+  changeView(game.root);
 };

@@ -1,6 +1,6 @@
 import {initialGame, hasLevel, setCurrentLevel, setLives, getLevel, setTime} from './quest';
 
-export default class QuestModel {
+class QuestModel {
   constructor(state = initialGame) {
     this._state = state;
   }
@@ -37,3 +37,5 @@ export default class QuestModel {
     this._state = setTime(this._state, this._state.time + 1);
   }
 }
+
+export default new QuestModel();
