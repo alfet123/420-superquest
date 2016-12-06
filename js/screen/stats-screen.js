@@ -1,5 +1,5 @@
-import AbstractView from './game/view';
-import Application from './application';
+import AbstractView from '../view';
+import Application from '../application';
 
 class StatsView extends AbstractView {
 

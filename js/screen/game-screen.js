@@ -1,17 +1,16 @@
-import {createElement} from './util';
-import {Result} from './data/quest-data';
-import questModel from './data/quest-model';
-import HeaderView from './game/header-view';
-import LevelView from './game/level-view';
-import GameOverView from './game/gameover-view';
-import Application from './application';
+import {Result} from '../data/quest-data';
+import questModel from '../data/quest-model';
+import HeaderView from '../game/header-view';
+import LevelView from '../game/level-view';
+import GameOverView from '../game/gameover-view';
+import Application from '../application';
 
 class GamePresenter {
   constructor() {
     this.header = new HeaderView(questModel.state);
     this.content = new LevelView(questModel.getCurrentLevel());
 
-    this.root = createElement(``);
+    this.root = document.createElement('div');
     this.root.appendChild(this.header.element);
     this.root.appendChild(this.content.element);
 

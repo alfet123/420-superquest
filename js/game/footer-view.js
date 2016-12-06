@@ -1,4 +1,4 @@
-import AbstractView from './view';
+import AbstractView from '../view';
 
 export default class FooterView extends AbstractView {
   getMarkup() {

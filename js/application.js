@@ -1,7 +1,13 @@
-import {changeView} from './util';
-import welcome from './welcome-screen';
-import newGame from './game-screen';
-import showStats from './stats-screen';
+import welcome from './screen/welcome-screen';
+import newGame from './screen/game-screen';
+import showStats from './screen/stats-screen';
+
+const main = document.getElementById('main');
+const changeView = (element) => {
+  main.innerHTML = ``;
+  main.appendChild(element);
+};
+
 
 export default class Application {
 
