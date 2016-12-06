@@ -1,4 +1,4 @@
-import welcome from './screen/welcome-screen';
+import createWelcome from './screen/welcome-screen';
 import newGame from './screen/game-screen';
 import showStats from './screen/stats-screen';
 
@@ -12,7 +12,7 @@ const changeView = (element) => {
 export default class Application {
 
   static showWelcome() {
-    changeView(welcome());
+    changeView(createWelcome());
   }
 
   static showGame() {
