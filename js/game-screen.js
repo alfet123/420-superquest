@@ -1,11 +1,10 @@
-import {changeView, createElement} from './util';
+import {createElement} from './util';
 import {Result} from './data/quest-data';
-
-import showStats from './stats-screen';
 import questModel from './data/quest-model';
 import HeaderView from './game/header-view';
 import LevelView from './game/level-view';
 import GameOverView from './game/gameover-view';
+import Application from './application';
 
 class GamePresenter {
   constructor() {
@@ -59,7 +58,7 @@ class GamePresenter {
   }
 
   exit() {
-    showStats(questModel.state);
+    Application.showStats(questModel.state);
   }
 
   updateHeader() {
@@ -98,5 +97,5 @@ const game = new GamePresenter();
 
 export default () => {
   game.restart(false);
-  changeView(game.root);
+  return game.root;
 };
