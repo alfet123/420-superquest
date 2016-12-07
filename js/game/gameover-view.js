@@ -1,4 +1,4 @@
-import AbstractView from './view';
+import AbstractView from '../view';
 
 export default class GameOverView extends AbstractView {
   constructor(win, continueGame = true) {

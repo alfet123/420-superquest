@@ -1,10 +1,9 @@
-import {createElement} from '../util';
-
 export default class AbstractView {
 
   get element() {
     if (!this._element) {
-      this._element = createElement(this.getMarkup());
+      this._element = document.createElement('div');
+      this._element.innerHTML = this.getMarkup();
       this.bindHandlers();
     }
     return this._element;

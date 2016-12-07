@@ -1,4 +1,4 @@
-import AbstractView from './view';
+import AbstractView from '../view';
 import FooterView from './footer-view';
 
 export default class LevelView extends AbstractView {

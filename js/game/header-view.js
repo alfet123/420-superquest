@@ -1,4 +1,4 @@
-import AbstractView from './view';
+import AbstractView from '../view';
 
 const range = (from = 0, to) => {
   return (callback) => {
