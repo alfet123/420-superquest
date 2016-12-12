@@ -1,4 +1,3 @@
-import {questInfo} from './quest-data';
 export const initialGame = {
   level: 0,
   lives: 3,
@@ -27,14 +26,3 @@ export const setLives = (game, lives) => {
     lives: lives
   });
 };
-
-export const hasLevel = (num) => typeof questInfo[`level-${num}`] !== 'undefined';
-
-export const getLevel = (num) => {
-  if (!hasLevel(num)) {
-    throw new RangeError(`This game has no level ${num}`);
-  }
-
-  return questInfo[`level-${num}`];
-};
-

@@ -1,9 +1,15 @@
-import {Result} from '../data/quest-data';
 import HeaderView from '../game/header-view';
 import LevelView from '../game/level-view';
 import GameOverView from '../game/gameover-view';
 import Application from '../application';
 import QuestModel from '../data/quest-model';
+
+const Result = {
+  DIE: 'die',
+  NOOP: 'noop',
+  NEXT: 'next',
+  WIN: 'win'
+};
 
 class GamePresenter {
   constructor(model) {
