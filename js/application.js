@@ -15,8 +15,8 @@ export default class Application {
     changeView(createWelcome());
   }
 
-  static showGame() {
-    changeView(newGame());
+  static showGame(questData) {
+    changeView(newGame(questData));
   }
 
   static showStats(stats) {

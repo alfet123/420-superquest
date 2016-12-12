@@ -1,14 +1,16 @@
 import {Result} from '../data/quest-data';
-import questModel from '../data/quest-model';
 import HeaderView from '../game/header-view';
 import LevelView from '../game/level-view';
 import GameOverView from '../game/gameover-view';
 import Application from '../application';
+import QuestModel from '../data/quest-model';
 
 class GamePresenter {
-  constructor() {
-    this.header = new HeaderView(questModel.state);
-    this.content = new LevelView(questModel.getCurrentLevel());
+  constructor(model) {
+    this.model = model;
+    this.header = new HeaderView(this.model.state);
+    this.content = new LevelView(this.model.getCurrentLevel());
+    this.content.onAnswer = this.answer.bind(this);
 
     this.root = document.createElement('div');
     this.root.appendChild(this.header.element);
@@ -17,7 +19,7 @@ class GamePresenter {
     this._interval = null;
   }
 
-  stopGame()  {
+  stopGame() {
     clearInterval(this._interval);
   }
 
@@ -25,7 +27,7 @@ class GamePresenter {
     this.changeLevel();
 
     this._interval = setInterval(() => {
-      questModel.tick();
+      this.model.tick();
       this.updateHeader();
     }, 1000);
   }
@@ -34,12 +36,12 @@ class GamePresenter {
     this.stopGame();
     switch (answer.result) {
       case Result.NEXT:
-        questModel.nextLevel();
+        this.model.nextLevel();
         this.startGame();
         break;
       case Result.DIE:
-        questModel.die();
-        this.endGame(false, !(questModel.isDead()));
+        this.model.die();
+        this.endGame(false, !(this.model.isDead()));
         break;
       case Result.WIN:
         this.endGame(true, false);
@@ -51,17 +53,17 @@ class GamePresenter {
 
   restart(continueGame) {
     if (!continueGame) {
-      questModel.restart();
+      this.model.restart();
     }
     this.startGame();
   }
 
   exit() {
-    Application.showStats(questModel.state);
+    Application.showStats(this.model.state);
   }
 
   updateHeader() {
-    const header = new HeaderView(questModel.state);
+    const header = new HeaderView(this.model.state);
     this.root.replaceChild(header.element, this.header.element);
     this.header = header;
   }
@@ -69,7 +71,7 @@ class GamePresenter {
   changeLevel() {
     this.updateHeader();
 
-    const level = new LevelView(questModel.getCurrentLevel());
+    const level = new LevelView(this.model.getCurrentLevel());
     level.onAnswer = this.answer.bind(this);
     this.changeContentView(level);
     level.focus();
@@ -81,8 +83,8 @@ class GamePresenter {
     gameOver.onRestart = this.restart.bind(this);
     gameOver.onExit = this.exit.bind(this);
 
-    game.changeContentView(gameOver);
-    game.updateHeader();
+    this.changeContentView(gameOver);
+    this.updateHeader();
   }
 
   changeContentView(view) {
@@ -92,9 +94,8 @@ class GamePresenter {
 
 }
 
-const game = new GamePresenter();
-
-export default () => {
-  game.restart(false);
+export default (questData) => {
+  const game = new GamePresenter(new QuestModel(questData));
+  game.startGame();
   return game.root;
 };

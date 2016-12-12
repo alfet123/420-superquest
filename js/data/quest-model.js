@@ -1,7 +1,9 @@
 import {initialGame, hasLevel, setCurrentLevel, setLives, getLevel, setTime} from './quest';
 
-class QuestModel {
-  constructor(state = initialGame) {
+
+export default class QuestModel {
+  constructor(data, state = initialGame) {
+    this.data = data;
     this._state = state;
   }
 
@@ -9,8 +11,16 @@ class QuestModel {
     return this._state;
   }
 
+  hasLevel(num) {
+    return typeof this.getLevel(num) !== 'undefined';
+  }
+
+  getLevel(num) {
+    return this.data[`level-${num}`];
+  }
+
   hasNextLevel() {
-    return hasLevel(this._state.level + 1);
+    return this.hasLevel(this._state.level + 1);
   }
 
   nextLevel() {
@@ -30,12 +40,14 @@ class QuestModel {
   }
 
   getCurrentLevel() {
-    return getLevel(this._state.level);
+    if (!this.hasLevel(this._state.level)) {
+      throw new RangeError(`This game has no level ${num}`);
+    }
+
+    return this.getLevel(this._state.level);
   }
 
   tick() {
     this._state = setTime(this._state, this._state.time + 1);
   }
 }
-
-export default new QuestModel();
