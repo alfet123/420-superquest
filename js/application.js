@@ -12,22 +12,6 @@ const changeView = (element) => {
 
 let questData;
 
-const status = (response) => {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
-  } else {
-    throw new Error(`${response.status}: ${response.statusText}`);
-  }
-};
-
-const json = (response) => response.json();
-
-const questModelPromise = window.fetch('https://intensive-ecmascript-server-wjkfyoijxa.now.sh/text-quest/quest').
-  then(status).
-  then(json).
-  then((data) => questData = data);
-
-
 export default class Application {
 
   static showWelcome() {
@@ -46,12 +30,7 @@ export default class Application {
     changeView(showError(error));
   }
 
-  static set onLoad(handler) {
-    questModelPromise.then(handler);
+  static set data(data) {
+    questData = data;
   }
-
-  static set onError(handler) {
-    questModelPromise.catch(handler);
-  }
-
 }
